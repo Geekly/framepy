@@ -2,13 +2,17 @@ __author__ = 'khooks'
 from math import sqrt
 import numpy as np
 from numpy import ndarray
-from utils import *
-from frame_element import *
+from elem_props import *
 
 a = 1. #in^2
 e = 10e6 #lb/in^2
 i = 1000. #in^4
+props = Properties()
+props.A = a
+props.E = e
+props.I = i
 
+print(props)
 #element geometry
 xydt = np.dtype([('node', np.int32), ('values', np.float64, 2)])
 bcdt = np.dtype([('bc', np.int32), ('node', np.int32), ('values', np.float64, (3))])
@@ -44,12 +48,6 @@ memloads[0] = (1, 0, 12., 200., 0, 12., -200.)
 memloads[1] = (2, -6., 8, 250., -6., 8., -250.)
 print(memloads)
 
-print( pf_stiff( mprop[0][0], mprop[0][1], mprop[0][2]))
-def pf_prestiff( props, )
-def pf_stiff(E, A, I, L):
-    k = E/L * np.array([A, 0., 0., -A, 0., 0.,
-                        0., 12.*i/L**2, 6.*i/L, 0., -12.*i/L**2, 6.*i/L,
-                        0., 6.*i/L, 4.*i, 0., -6.*i/L, 2.*i,
-                        -A, 0., 0., A, 0., 0.,
-                        0., -12.*i/L**2, -6.*i/L, 0., 12.*i/L**2, -6.*i/L,
-                        0., 6.*i/L, 2.*i, 0., -6.*i/L, 4.*i], dtype=np.float64)
+print( pf_stiff( [mprop[0][0], mprop[0][1], mprop[0][2]]))
+
+
